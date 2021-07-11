@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            /* background-color: cornflowerblue; */
+            display: block;
+            text-align: center;
+            font-style: italic;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background-image:url("https://i.pinimg.com/originals/03/82/46/03824691c116ca5b418b07da443abb8d.jpg") ;
+            }
+    </style>
+</head>
+<body>
+    <h1>Question Game!</h1>
+    <h2 id="score"></h2>
+    <h2 id="question"></h2>
+    <p>how it works: so if you say true to the  answer u press t but if the answer is wrong u press f for false</p>
+    <script>
+        var questions = [
+          {q: "The sky is red", a: "f"},
+          {q: "spongebob is yellow", a: "t"},
+          {q: "Mr.krab hates money", a: "f"},
+          {q: "Squidward is always happy", a: "f"},
+          {q: "The town that spongebob live in is under water", a: "t"},
+          {q: "A rock live inside patrick", a: "f"},
+          {q: "sandy is smart", a: "t"},
+          {q: "plankton is evil", a: "t"},
+          {q: "spongebob is friend with everyone", a: "t"},
+          {q: "plankton is smart", a: "t"}
+        
+
+ 
+        ];
+        var score = 0;
+        var questionsIndex = 0;
+
+        function renderQuestion(){
+            if(questionsIndex <= (questions.length - 1)){
+                document.querySelector("#question").innerHTML = questions[questionsIndex].q;
+            }
+            else {
+        document.querySelector("#question").innerHTML = "Game Over!";
+        document.querySelector("#score").innerHTML = "Final Score: " + score + " out of " + questions.length;
+      }
+        }
+
+
+        function updateScore() {
+      document.querySelector("#score").innerHTML = "Score: " + score;
+    }
+
+    renderQuestion();
+    updateScore();
+
+
+    document.onkeyup = function(event) {
+
+        if (questionsIndex === questions.length) {
+        return;
+      }
+ var userInput = event.key.toLowerCase();
+
+      // Only run this code if "t" or "f" were pressed.
+      if (userInput === "t" || userInput === "f") {
+
+        // If they guess the correct answer, increase and update score, alert them they got it right.
+        if (userInput === questions[questionsIndex].a) {
+          alert("Correct!");
+          score++;
+          updateScore();
+        }
+        else {
+          alert("Wrong!");
+        }
+
+        // Increment the questionIndex variable and call the renderQuestion function.
+        questionsIndex++;
+        renderQuestion();
+
+      }
+
+    };
+    
+        // for(var x = 0; x < questions.length; x++) {
+        //     console.log
+        //     var answer = confirm(questions[x].q);
+        //     if ((answer === true && questions[x].a === "t") || 
+        //     (answer === false && questions[x].a === "f")){
+        //         score++;
+        //         alert("Correct you earn 1 point!");
+        //     }
+        //     else {alert("You got the answer wrong try again")}
+        // }
+        // alert(`you  got ${score} out of ${questions.length}`)
+    
+    </script>
+</body>
+</html>
